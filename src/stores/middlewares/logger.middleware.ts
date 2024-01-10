@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-type-constraint */
 import { StateCreator, StoreMutatorIdentifier } from 'zustand'
 
 type Logger = <

@@ -1,7 +1,7 @@
 import { StateStorage, createJSONStorage } from 'zustand/middleware';
 
 
-
+//!StateStorage implementa las propiedades getItem(), setItem(),removeItem()
 const storageApi: StateStorage =  {
 
   getItem: function ( name: string ): string | Promise<string | null> | null {
@@ -20,5 +20,5 @@ const storageApi: StateStorage =  {
   }
 }
 
-
+//!Exportamos customSessionStorage para que se use en la propiedad storage del middleware persist. customSessionStorage ya seria reutilizable
 export const customSessionStorage = createJSONStorage( () => storageApi  );

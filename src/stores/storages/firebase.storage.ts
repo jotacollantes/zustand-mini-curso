@@ -13,7 +13,8 @@ const storageApi: StateStorage =  {
       return JSON.stringify( data );
 
     } catch (error) {
-      throw error;
+      //throw error;
+      return null
     }
 
   },

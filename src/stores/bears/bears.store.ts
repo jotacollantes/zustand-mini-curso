@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { devtools, persist } from 'zustand/middleware';
 
 interface Bear {
   id: number;
@@ -14,7 +14,10 @@ interface BearState {
 
   bears: Bear[];
 
-
+  //! esta propiedad servirar para anadir objetos con propiedades cuyos valores seran computados con un getter de javascript. Si ya se usa el persist el get de javascript ya no va a funcionar y habria que modificar la propiedad para que sea un metodo que retorna un number
+  //  computed: {
+  //    totalBears: number;
+  //  },
   totalBears: () => number;
 
   increaseBlackBears: ( by: number ) => void;
@@ -32,8 +35,7 @@ interface BearState {
 
 
 export const useBearStore = create<BearState>()(
-
-  persist(
+  devtools(persist(
 
     ( set, get ) => ( {
       blackBears: 10,
@@ -43,25 +45,34 @@ export const useBearStore = create<BearState>()(
 
       bears: [ { id: 1, name: 'Oso #1' } ],
 
+
+      // computed: {
+      //   //!Usamos el metodo get de los objetos de javascript
+      //   get totalBears() {
+      //     //!  con get() que es un metodo de zustand obtenemos los valores del state no confundir con el metodo get() de los objetos de javascript
+      //     return get().blackBears + get().polarBears + get().pandaBears + get().bears.length;
+      //   }
+      // },
+    
       totalBears: () => {
         return get().blackBears + get().polarBears + get().pandaBears + get().bears.length;
       },
 
 
 
-      increaseBlackBears: ( by: number ) => set( ( state ) => ( { blackBears: state.blackBears + by } ) ),
-      increasePolarBears: ( by: number ) => set( ( state ) => ( { polarBears: state.polarBears + by } ) ),
-      increasePandaBears: ( by: number ) => set( ( state ) => ( { pandaBears: state.pandaBears + by } ) ),
+      increaseBlackBears: ( by: number ) => set( ( state ) => ( { blackBears: state.blackBears + by } ),false,'increaseBlackBears' ),
+      increasePolarBears: ( by: number ) => set( ( state ) => ( { polarBears: state.polarBears + by } ),false,'increasePolarBears' ),
+      increasePandaBears: ( by: number ) => set( ( state ) => ( { pandaBears: state.pandaBears + by } ),false,'increasePandaBears' ),
 
 
-      doNothing: () => set( state => ( { bears: [ ...state.bears ] } ) ),
+      doNothing: () => set( state => ( { bears: [ ...state.bears ] } ),false,'doNothing' ),
       addBear: () => set( state => ( {
         bears: [ ...state.bears, { id: state.bears.length + 1, name: `Oso #${ state.bears.length + 1 }` } ]
-      } ) ),
-      clearBears: () => set( { bears: [] } )
+      } ),false,'addBear' ),
+      clearBears: () => set( { bears: [] },false,'clearBears' )
 
     } ),
     { name: 'bears-store' }
-  )
+  ))
 
 );
