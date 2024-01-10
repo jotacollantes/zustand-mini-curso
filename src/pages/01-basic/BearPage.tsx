@@ -33,6 +33,7 @@ export const BlackBears = () => {
 
   const blackBears = useBearStore( state => state.blackBears );
   const increaseBlackBears = useBearStore( state => state.increaseBlackBears );
+  //! No es recomendable usar desestructuracion
   // const { blackBears, increaseBlackBears  } = useBearStore(state => state);
 
   return (
@@ -93,7 +94,7 @@ export const PolarBears = () => {
 
 
 export const BearsDisplay = () => {
-
+  //!useShallow va a revisar las propiedades del objeto state.bears y verificar si realmente se modifico para poder evitar renderizaciones o re-renders innecesarios
   const bears = useBearStore( useShallow( state => state.bears ));
   // const bears = useBearStore( state => state.bears );
   const doNothing = useBearStore( state => state.doNothing );
