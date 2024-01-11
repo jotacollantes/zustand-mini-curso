@@ -6,6 +6,7 @@ export const JiraPage = () => {
   const pendingTasks = useTaskStore( state => state.getTaskByStatus('open') );
   const inProgressTasks = useTaskStore( state => state.getTaskByStatus('in-progress') );
   const doneTasks = useTaskStore( state => state.getTaskByStatus('done') );
+  console.log({pendingTasks,inProgressTasks,doneTasks})
   
   return (
     <>

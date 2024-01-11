@@ -34,6 +34,7 @@ export const JiraTasks = ( { title, status, tasks }: Props ) => {
     <div
       onDragOver={ handleDragOver }
       onDragLeave={ handleDragLeave }
+      //Para poder ejecutar el evento onDrop hay que usar preventDefault en todos los eventos
       onDrop={ handleDrop }
       className={
         classNames("!text-black border-4  relative flex flex-col rounded-[20px]  bg-white bg-clip-border shadow-3xl shadow-shadow-500  w-full !p-4 3xl:p-![18px]", {
@@ -41,7 +42,7 @@ export const JiraTasks = ( { title, status, tasks }: Props ) => {
           'border-green-500 border-dotted': isDragging && onDragOver,
         })
       }>
-
+        
 
       {/* Task Header */ }
       <div className="relative flex flex-row justify-between">

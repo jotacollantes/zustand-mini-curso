@@ -7,7 +7,7 @@ export const Dashboard = () => {
   const totalBears = useBearStore( state => state.totalBears );
   const firstName = usePersonStore( state => state.firstName );
   const tasks = useTaskStore( state => state.tasks );
-
+ //! Para tomar la cantidad de propiedades que tiene el objeto, Object.keys duevuelve un array con los nombres de las propiedades
   const taskCount = Object.keys(tasks).length;
 
   return (
