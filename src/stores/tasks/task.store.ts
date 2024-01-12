@@ -37,7 +37,7 @@ const storeApi: StateCreator<TaskState, [["zustand/immer", never]]> = (
     const tasks = get().tasks;
     console.log(Object.values(tasks));
     //! No se puede usar for/forof/foreach porque tasks no es un array
-    //! Object.values() devuelve un array de tareas :
+    //! Object.values() devuelve un array de objetos task :
     /*
     [
       { id: 'ABC-1', title: 'Task 1', status: 'open' },
@@ -50,8 +50,10 @@ const storeApi: StateCreator<TaskState, [["zustand/immer", never]]> = (
   },
 
   addTask: (title: string, status: TaskStatus) => {
+    //!Creo una nueva tarea
     const newTask = { id: uuidv4(), title, status };
     //? Con el middleware de immer
+    //!Mutamos el estado agregando la nueva tarea, el middleware de immer se encargara de mantener los valores actuales del state y no es necesario hacer el spread... de state.task
     set((state) => {
       state.tasks[newTask.id] = newTask;
     });
@@ -79,11 +81,15 @@ const storeApi: StateCreator<TaskState, [["zustand/immer", never]]> = (
   },
 
   changeTaskStatus: (taskId: string, status: TaskStatus) => {
+    //!Propagamos todas las propiedades de la task cuyo taskId coincida con el name/id de la key  de la propiedad
     const task = { ...get().tasks[taskId] };
+    //!sobreescribimos la propiedad status
     task.status = status;
     //? con immer middleware
     set((state) => {
+      //!Sobreescribimos(Mutacion) el objeto cuyo key concida con taskId
       state.tasks[taskId] = {
+        //!Propagamos las propiedades del objeto task
         ...task,
         // ...state.tasks[taskId],
         // status,

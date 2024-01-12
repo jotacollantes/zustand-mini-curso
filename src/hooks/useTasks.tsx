@@ -33,6 +33,8 @@ export const useTasks = ({ status }: Options) => {
     } );
 
     if ( !isConfirmed ) return;
+    //!El status es dependiendo de la columna o tipo de lista de tareas donde haya seleccionado la opcion de anadir tarea puede ser  "open" | "in-progress" | "done". value es el nombre de la tarea proporcionada por sweetalert y status es lo que se recibe como props en este custom hook
+
     addTask( value, status );
   };
 

@@ -26,7 +26,7 @@ export const JiraTasks = ( { title, status, tasks }: Props ) => {
     handleAddTask,
     onDragOver,
 
-  } = useTasks({ status });
+  } = useTasks({ status:status });
 
 
 
