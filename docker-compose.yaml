@@ -22,8 +22,8 @@ services:
       JWT_SECRET: ${JWT_SECRET}
   
   db:
-    image: postgres:15.2
-    restart: always
+    image: postgres:15.3
+    #restart: always
     ports:
       - "5432:5432"
     environment:

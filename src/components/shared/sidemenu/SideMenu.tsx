@@ -1,6 +1,6 @@
 import type { IconType } from 'react-icons';
 import { IoSpeedometerOutline, IoPawOutline, IoLogOutOutline, IoHeartOutline, IoListOutline, IoAccessibilityOutline } from 'react-icons/io5';
-import { NavLink } from 'react-router-dom';
+//import { NavLink } from 'react-router-dom';
 import './SideMenu.css';
 import { SideMenuItem } from './SideMenuItem';
 import { useAuthStore } from '../../../stores';

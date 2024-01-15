@@ -22,6 +22,7 @@ export const LoginPage = () => {
     console.log(username.value, password.value, remember.checked);
 
     try {
+      //COmo loginUser ejecuta una promesa que no devuelve nada <void> si todo sale bien se ejecuta el codigo dentro del try
       await loginUser(username.value, password.value)
       navigate('/dashboard');
 

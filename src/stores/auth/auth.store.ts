@@ -31,6 +31,7 @@ const storeApi: StateCreator<AuthState> = ( set ) => ( {
       set( { status: 'authorized', token, user } );
 
     } catch ( error ) {
+      //! SI aparece un error o no se pudo autenticar
       set( { status: 'unauthorized', token: undefined, user: undefined } );
       throw 'Unauthorized';
     }
