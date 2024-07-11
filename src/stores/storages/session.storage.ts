@@ -5,7 +5,7 @@ import { StateStorage, createJSONStorage } from 'zustand/middleware';
 const storageApi: StateStorage =  {
 
   getItem: function ( name: string ): string | Promise<string | null> | null {
-    
+    //!sessionStorage es propio del navegador.
     const data = sessionStorage.getItem(name);
     return data;
 

@@ -1,15 +1,15 @@
 import { StateStorage, createJSONStorage } from 'zustand/middleware';
 
-const firebaseUrl = 'https://zustand-storage-default-rtdb.firebaseio.com/zustand';
-
-
+const firebaseUrl = 'https://zustand-cf6eb-default-rtdb.firebaseio.com/zustand';
 
 const storageApi: StateStorage =  {
 
   getItem: async function ( name: string ): Promise<string | null> {
     
     try {
+       //! name: "person-storage",
       const data = await fetch(`${ firebaseUrl }/${ name }.json`).then( res => res.json());
+      //Firebase lo devuelve como un objeto y para incorporarlo al state de zustand hay que serializarlo
       return JSON.stringify( data );
 
     } catch (error) {
@@ -22,7 +22,7 @@ const storageApi: StateStorage =  {
   setItem: async function ( name: string, value: string ): Promise<void> {
     await fetch(`${ firebaseUrl }/${ name }.json`, {
       method: 'PUT',
-      body: value
+      body: value //{ firstName: '',lastName:''}
     }).then( res => res.json());
 
     // console.count('setItem');
