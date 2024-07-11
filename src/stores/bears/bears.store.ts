@@ -13,7 +13,11 @@ interface BearState {
 
   bears: Bear[];
   
-  //! esta propiedad servirar para anadir objetos con propiedades cuyos valores seran computados con un getter de javascript
+  //! Opcion 1 como un metodo normal
+  //totalBears: () => number;
+  
+
+  //! Opcion 2esta propiedad servirar para anadir objetos con propiedades cuyos valores seran computados con un getter de javascript
   computed: {
     totalBears: number;
   },
@@ -40,6 +44,10 @@ export const useBearStore = create<BearState>()((set, get) => ({
 
   bears: [ { id: 1, name: 'Oso #1' }  ],
 
+   //! Opcion 1 como un metodo normal
+  //  totalBears: () => {
+  //   return get().blackBears + get().polarBears + get().pandaBears + get().bears.length;
+  // },
   computed: {
     //!Usamos el metodo get de los objetos de javascript
     get totalBears() {
