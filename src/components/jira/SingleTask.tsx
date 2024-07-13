@@ -7,7 +7,7 @@ interface Props {
   task: Task;
 }
 
-
+//!Este es el componente de cada tarea individual donde solo se va a usar los metodos onDragStart() onDragEnd()
 export const SingleTask = ( { task }: Props ) => {
 
   const setDraggingTaskId = useTaskStore( state => state.setDraggingTaskId );

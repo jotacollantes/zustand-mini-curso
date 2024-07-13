@@ -19,7 +19,6 @@ export const JiraTasks = ( { title, status, tasks }: Props ) => {
 
   const {
     isDragging,
-
     handleDragOver,
     handleDragLeave,
     handleDrop,
