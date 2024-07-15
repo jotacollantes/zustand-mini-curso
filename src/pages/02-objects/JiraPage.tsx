@@ -6,7 +6,7 @@ export const JiraPage = () => {
   const pendingTasks = useTaskStore( state => state.getTaskByStatus('open') );
   const inProgressTasks = useTaskStore( state => state.getTaskByStatus('in-progress') );
   const doneTasks = useTaskStore( state => state.getTaskByStatus('done') );
-  console.log({pendingTasks,inProgressTasks,doneTasks})
+  //console.log({pendingTasks,inProgressTasks,doneTasks})
   
   return (
     <>
@@ -14,7 +14,7 @@ export const JiraPage = () => {
       <p>Manejo de estado con objectos de Zustand</p>
       <hr />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border border-red-500">
           
           <JiraTasks title='Pendientes' tasks={ pendingTasks } status='open' />
           

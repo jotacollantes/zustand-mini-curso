@@ -10,7 +10,7 @@ export const Root = () => {
   }
   
   return (
-    <main>
+    <main className='border border-red-500'>
       <Outlet />
     </main>
   )

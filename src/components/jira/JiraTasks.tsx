@@ -1,12 +1,9 @@
-import { IoAddOutline, IoCheckmarkCircleOutline } from 'react-icons/io5';
-import classNames from 'classnames';
+import { IoAddOutline, IoCheckmarkCircleOutline } from "react-icons/io5";
+import classNames from "classnames";
 
-import { Task, TaskStatus } from '../../interfaces';
-import { SingleTask } from './SingleTask';
-import { useTasks } from '../../hooks/useTasks';
-
-
-
+import { Task, TaskStatus } from "../../interfaces";
+import { SingleTask } from "./SingleTask";
+import { useTasks } from "../../hooks/useTasks";
 
 interface Props {
   title: string;
@@ -14,67 +11,66 @@ interface Props {
   status: TaskStatus;
 }
 
-
-export const JiraTasks = ( { title, status, tasks }: Props ) => {
-
+export const JiraTasks = ({ title, status, tasks }: Props) => {
   const {
     isDragging,
     handleDragOver,
-    handleDragLeave,
     handleDrop,
     handleAddTask,
     onDragOver,
-
-  } = useTasks({ status:status });
-
-
-
+  } = useTasks({ status: status });
+   
   return (
     <div
-      onDragOver={ handleDragOver }
-      onDragLeave={ handleDragLeave }
+    //Estos eventos afectan al contenedor global de las single task. En cada  single task generado manejamos el evento onDragStart y onDragEnd
+    
+
+    /** 
+     Cuando se inicia el proceso de drag (arrastrar) se ejecutan 3 eventos: 
+     - el onDragStart en el div que esta en single task que ejecuta el metodo () => setDraggingTaskId(task.id )
+     - el onDragOver que ejecuta el metodo handleDragOver en este div que contiene al div del single stack
+     - el onDragLeave que ejecuta el metodo handleDragLeave cuando el div del single task deja su ubicacion
+     
+     onDragOver={handleDragOver} y onDragLeave={handleDragOver} son metodos para manejar los colores de los bordes cuando se esta sobre cada div de tareas ya sea de pendientes avanzado o terminadas.
+
+      Cuanso ya se suelta la tarea se ejecutan 2 eventos:
+      - onDragEnd en el div que esta en single task que ejecuta el metodo () => removeDraggingTaskId().
+      - el onDrop que ejecuta el metodo handleDrop en este div que contiene al div del single stack. handleDrop maneja el metodo onTaskDrop( status ) para actualizar el state
+    */
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragOver}
       //Para poder ejecutar el evento onDrop hay que usar preventDefault en todos los eventos
-      onDrop={ handleDrop }
-      className={
-        classNames("!text-black border-4  relative flex flex-col rounded-[20px]  bg-white bg-clip-border shadow-3xl shadow-shadow-500  w-full !p-4 3xl:p-![18px]", {
-          'border-blue-500 border-dotted': isDragging,
-          'border-green-500 border-dotted': isDragging && onDragOver,
-        })
-      }>
-        
-
-      {/* Task Header */ }
-      <div className="relative flex flex-row justify-between">
-
-        <div className="flex items-center justify-center">
-
+      onDrop={handleDrop}
+      className={classNames(
+        "!text-black border-4  relative flex flex-col rounded-[20px]  bg-white bg-clip-border shadow-3xl shadow-shadow-500  w-full !p-4 3xl:p-![18px] border-red-400",
+        {
+          "border-blue-500 border-dotted": isDragging,
+          "border-green-500 border-dotted": isDragging && onDragOver,
+        }
+      )}
+    >
+      {/* Task Header */}
+      <div className="relative flex flex-row justify-between border border-red-400">
+        <div className="flex items-center justify-center border border-red-400">
           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-indigo-100">
             <span className="flex justify-center items-center h-6 w-6 text-brand-500">
-              <IoCheckmarkCircleOutline style={ { fontSize: '50px' } } />
+              <IoCheckmarkCircleOutline style={{ fontSize: "50px" }} />
             </span>
           </div>
 
-          <h4 className="ml-4 text-xl font-bold text-navy-700">{ title }</h4>
+          <h4 className="ml-4 text-xl font-bold text-navy-700">{title}</h4>
         </div>
 
-        <button onClick={ handleAddTask }>
+        <button onClick={handleAddTask}>
           <IoAddOutline />
         </button>
-
       </div>
 
-      {/* Task Items */ }
-      <div className="h-full w-full">
-
-
-        {
-          tasks.map( task => (
-            <SingleTask key={ task.id } task={ task } />
-          ) )
-        }
-
-
-
+      {/* Task Items */}
+      <div className="h-full w-full border border-red-400">
+        {tasks.map((task) => (
+          <SingleTask key={task.id} task={task} />
+        ))}
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ export const SingleTask = ( { task }: Props ) => {
       draggable
       onDragStart={ () => setDraggingTaskId(task.id ) }
       onDragEnd={ () => removeDraggingTaskId() }
-      className="mt-5 flex items-center justify-between p-2">
+      className="mt-5 flex items-center justify-between p-2 border border-black">
       <div className="flex items-center justify-center gap-2">
         <p className="text-base font-bold text-navy-700">
           { task.title }

@@ -7,11 +7,13 @@ import { TaskStatus } from '../interfaces';
 
 interface Options {
   status: TaskStatus;
+ 
 }
 
 export const useTasks = ({ status }: Options) => {
 
   const isDragging = useTaskStore( state => !!state.draggingTaskId );
+  const taskId = useTaskStore( state => state.draggingTaskId );
   const onTaskDrop = useTaskStore( state => state.onTaskDrop );
   const addTask = useTaskStore( state => state.addTask );
 
@@ -25,11 +27,13 @@ export const useTasks = ({ status }: Options) => {
       inputLabel: 'Nombre de la tarea',
       inputPlaceholder: 'Ingrese el nombre de la tarea',
       showCancelButton: true,
+      //inputValidator:result => !result && 'You need to select something!'
       inputValidator: ( value ) => {
         if ( !value ) {
           return 'Debe de ingresar un nombre para la tarea';
         }
       }
+      
     } );
 
     if ( !isConfirmed ) return;
@@ -41,11 +45,13 @@ export const useTasks = ({ status }: Options) => {
 
   const handleDragOver = ( event: DragEvent<HTMLDivElement> ) => {
     event.preventDefault();
+    console.log(`start drag over ${taskId} ${status} `)
     setOnDragOver( true );
   };
 
   const handleDragLeave = ( event: DragEvent<HTMLDivElement> ) => {
     event.preventDefault();
+    console.log(`leave drag  ${taskId} ${status}`)
     setOnDragOver( false );
   };
 
@@ -53,14 +59,16 @@ export const useTasks = ({ status }: Options) => {
     event.preventDefault();
     setOnDragOver( false );
     onTaskDrop( status );
+    console.log(`drop drag  ${taskId} ${status}`)
   };
 
   return {
     // Properties
     isDragging,
 
-    // Methods
+    //State
     onDragOver,
+    // Methods
     handleAddTask,
     handleDragOver,
     handleDragLeave,
