@@ -12,11 +12,12 @@ export const WeddingInvitationPage = () => {
   const setFirstName = useWeddingBoundStore( state => state.setFirstName );
   const setLastName = useWeddingBoundStore( state => state.setLastName );
 
-  const guestCount = useWeddingBoundStore( state => state.guestCount );
-  const setGuestCount = useWeddingBoundStore( state => state.setGuestCount );
-  //!Ejecuto el getter de la fecha
-  const eventYYYYMMDD = useWeddingBoundStore( state => state.eventYYYYMMDD() );
-  //!Ejecuto el getter de la hora
+   const guestCount = useWeddingBoundStore( state => state.guestCount );
+   const setGuestCount = useWeddingBoundStore( state => state.setGuestCount );
+  
+   // //!Ejecuto el getter de la fecha
+   const eventYYYYMMDD = useWeddingBoundStore( state => state.eventYYYYMMDD() );
+  // //!Ejecuto el getter de la hora
   const eventHHMM = useWeddingBoundStore( state => state.eventHHMM() );
   
   const setEventDate = useWeddingBoundStore( state => state.setEventDate );
@@ -25,13 +26,13 @@ export const WeddingInvitationPage = () => {
   const isConfirmed = useWeddingBoundStore( state => state.isConfirmed );
   const setIsConfirmed = useWeddingBoundStore( state => state.setIsConfirmed );
 
-  const eventDate = useWeddingBoundStore( state => state.eventDate );
+  // const eventDate = useWeddingBoundStore( state => state.eventDate );
 
 
   const onSubmit = (event:FormEvent<HTMLFormElement> ) => {
     event.preventDefault();
-
-    console.log({ firstName, lastName, guestCount, eventDate, isConfirmed });
+    console.log({ firstName });
+    // console.log({ firstName, lastName, guestCount, eventDate, isConfirmed });
   }
 
 

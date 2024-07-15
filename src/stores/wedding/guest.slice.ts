@@ -5,9 +5,6 @@ export interface GuestSlice {
 
   setGuestCount: (guestCount: number) => void;
 }
-
-
-
 export const createGuestSlice: StateCreator<GuestSlice> = (set) =>({
 
   guestCount: 0,
