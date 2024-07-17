@@ -42,8 +42,11 @@ export const usePersonStore = create<PersonState & Actions>()(
   )
 );
 
-usePersonStore.subscribe( (nextState, /*prevState*/)  => {
-
+//! con suscribe puedo escibir el state {firstName,lastName} de useWeddingBoundStore desde este store usePersonStore.
+usePersonStore.subscribe( (nextState, prevState)  => {
+  console.log(nextState)
+  console.log(prevState)
+  //!nextState tiene el ultimo valor del state {firstName,lastName}
   const { firstName, lastName } = nextState;
 
   useWeddingBoundStore.getState().setFirstName(firstName);

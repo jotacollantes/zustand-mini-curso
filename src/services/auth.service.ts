@@ -41,6 +41,7 @@ export class AuthService {
   static checkStatus = async():Promise<LoginResponse> => {
 
     try {
+      //! Aqui no envio el bearer token en la req porque en su lugar lo hace el interceptor de tesloApi
       const { data } = await tesloApi.get<LoginResponse>('/auth/check-status');
 
       return data;

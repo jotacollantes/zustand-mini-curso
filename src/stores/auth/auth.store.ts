@@ -8,6 +8,7 @@ import { devtools, persist } from 'zustand/middleware';
 export interface AuthState {
 
   status: AuthStatus;
+  //Son opcionales porque en algun momento no existen ni los datos del usuario ni del token
   token?: string;
   user?: User;
 
@@ -28,11 +29,13 @@ const storeApi: StateCreator<AuthState> = ( set ) => ( {
 
     try {
       const { token, ...user } = await AuthService.login( email, password );
+      //! si todo sale bien
       set( { status: 'authorized', token, user } );
 
     } catch ( error ) {
       //! SI aparece un error o no se pudo autenticar
       set( { status: 'unauthorized', token: undefined, user: undefined } );
+      //!Aqui lanzamos la excepcion que sera capturada por el catch dentro del componente desde donde se llama a esta funcion
       throw 'Unauthorized';
     }
 
